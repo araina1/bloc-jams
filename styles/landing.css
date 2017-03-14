@@ -28,28 +28,18 @@ body.landing {
 }
 
 .selling-points {
-     position: relative;
- }
- 
- .point { 
-     position: relative;
-     padding: 2rem;
-     text-align: center;
-     opacity: 0;
-     -webkit-transform: scaleX(0.9) translateY(3rem);
-     -moz-transform: scaleX(0.9) translateY(3rem);
-     transform: scaleX(0.9) translateY(3rem);
-     -webkit-transition: all 0.25s ease-out;
-     -moz-transition: all 0.25s ease-out;
-     transition: all 0.25s ease-out;
-     -webkit-transition-delay: 1s;
-     -moz-transition-delay: 1s;
-     transition-delay: 1s;
- }
- 
- .point .point-title {
-     font-size: 1.25rem;
- }
+    position: relative;
+}
+
+.point {
+    position: relative;
+    padding: 2rem;
+    text-align: center;
+}
+
+.point  .point-title {
+    font-size: 1.25rem;
+}
  
  .ion-music-note,
  .ion-radio-waves,
