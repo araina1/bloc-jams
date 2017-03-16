@@ -29,6 +29,21 @@ var albumPicasso = {
      ]
  };
 
+ var albumTheBeatles = {
+     title: 'A Hard Day Night',
+     artist: 'The Beatles',
+     label: 'Parlophone',
+     year: '1964',
+     albumArtUrl: 'assets/images/album_covers/15.png',
+     songs: [
+         { title: 'Hey Jude?', duration: '4:34' },
+         { title: 'Yellow Submarine', duration: '5:09' },
+         { title: 'Eleanor Rigby', duration: '2:20'},
+         { title: 'If I Fell', duration: '4:41' },
+         { title: 'When I Get Home', duration: '2:39'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -41,14 +56,13 @@ var albumPicasso = {
      return template;
  };
 
- var setCurrentAlbum = function(album) {
-     // #1
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
- 
+
+ var setCurrentAlbum = function(album) {
      // #2
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -59,11 +73,22 @@ var albumPicasso = {
      albumSongList.innerHTML = '';
  
      // #4
-     for (var i = 0; i < album.songs.length; i++) {
-         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
+     for (i = 0; i < album.songs.length; i++) {
+         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
      }
  };
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+
+var albums = [albumPicasso, albumMarconi, albumTheBeatles];
+var index = 1;
+albumImage.addEventListener("click", function(event) {
+      setCurrentAlbum(albums[index]);
+      index++;
+      if (index == albums.length) {
+        index = 0;
+      }
+   });
+ 
  };
