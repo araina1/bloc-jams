@@ -179,11 +179,67 @@ $(document).ready(function() {
 var albums = [albumPicasso, albumMarconi, albumTheBeatles];
 var index = 1;
 albumImage.addEventListener("click", function(event) {
-      setCurrentAlbum(albums[index]);
-      index++;
-      if (index == albums.length) {
+    setCurrentAlbum(albums[index]);
+    index++;
+    if (index == albums.length) {
         index = 0;
-      }
+    }
    });
  
  };
+
+var setSong = function(songNumber) {
+    currentlyPlayingSongNumber = songNumber;
+    currentSongFromAlbum = currentAlbum.songs[songNumber - 1]; 
+};
+    
+var getSongNumberCell = function(number) {
+    return $('.song-item-number[data-song-number = " ' + number + ' " ]');
+};
+
+var createSongRow = function(songNumber, songName, songLength) {
+    var template = ' < tr class = "album-view-song-item " > '
+    var songNumber = parseInt($(this).attr('data-song-number'))
+    if (currentlyPlayingSongNumber !== null) {
+        var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+        currentlyPlayingCell.html(currentlyPlayingSongNumber);
+    }
+    
+    if (currentlyPlayingSongNumber !== songNumber){
+        $(this).html(pauseButtonTemplate);
+        setSong(songNumber);
+        updatePlayerBarSong();
+    }
+    else if (currentlyPlayingSongNumber === songNumber) {
+        $(this).html(playButtonTemplate);
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        setSong(songNumber);
+    }
+};
+
+var $playBarControl = $('.main-controls .play-pause');
+
+var $previousButton = $('.main-controls .previous');
+
+var $nextButton = $('.main-controls .next');
+
+var togglePlayFromToggleBar = function() {
+    if (currentSoundFile.isPaused && $playBarControl.click()) {
+       $songNumberCell.html(pauseButtonTemplate);
+       $playBarControl.html(playerBarPauseButton);
+       currentSoundFile.play();
+    }
+    else {
+        $songNumberCell.html(playButtonTemplate);
+        $playBarControl.html(playerBarPlayButton);
+        currentSoundFile.pause();
+    }
+};
+
+$(document).ready(function()) {
+    setCurrentAlbum(albumPicasso);
+    $previousButton.click(previousSong);
+    $nextButton.click(nextSong);
+    $playBarControl.click(togglePlayFromToggleBar);
+};
+
