@@ -216,30 +216,3 @@ var createSongRow = function(songNumber, songName, songLength) {
         setSong(songNumber);
     }
 };
-
-var $playBarControl = $('.main-controls .play-pause');
-
-var $previousButton = $('.main-controls .previous');
-
-var $nextButton = $('.main-controls .next');
-
-var togglePlayFromToggleBar = function() {
-    if (currentSoundFile.isPaused && $playBarControl.click()) {
-       $songNumberCell.html(pauseButtonTemplate);
-       $playBarControl.html(playerBarPauseButton);
-       currentSoundFile.play();
-    }
-    else {
-        $songNumberCell.html(playButtonTemplate);
-        $playBarControl.html(playerBarPlayButton);
-        currentSoundFile.pause();
-    }
-};
-
-$(document).ready(function()) {
-    setCurrentAlbum(albumPicasso);
-    $previousButton.click(previousSong);
-    $nextButton.click(nextSong);
-    $playBarControl.click(togglePlayFromToggleBar);
-};
-
